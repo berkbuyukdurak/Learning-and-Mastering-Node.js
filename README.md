@@ -33,12 +33,62 @@ A Repository for Those Who Want to Master Node.js and related Frameworks
 ```
 const http = require('http');
 
+cost data = [
+  {id: 1, name: 'A'},
+  {id: 2, name: 'B'},
+  {id: 3, name: 'C'}
+];
+
 const server = http.createServer((req, res) => {
   const { headers, url, method } = req;
   console.log(headers, url, method);
+  
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('X-Powered-By', 'Node.js');
+  res.end(JSON.stringify({
+    success: true,
+    data: data
+  }));
 });
 
 const PORT = 5000;
 
 server.listen(PORT, => console.log('Server running on port $(PORT)'));
 ```
+
+
+### IMPORTANT HTTP STATUS CODES
+* 1.xx Informational
+* 2.xx Success
+  * 200 Success
+  * 201 Created
+  * 204 No Content
+* 3.xx Redirection
+  * 304 Not Modified
+* 4.xx Client Error
+  * 400 Bad Request
+  * 401 Unauthorized
+  * 404 Not Found
+* 5.xx Server Error
+  * 500 Internal Server Error
+
+- *[ALL CODES](https://developer.mozilla.org/en-US/docs/web/http/status)*
+
+### HTTP REQUEST METHODS
+| REQUEST METHOD | What is it for?         |
+|----------------|-------------------------|
+| GET            | Retrieve Resource       |
+| POST           | Submit Resource         |
+| PUT / PATCH    | Update Resource         |
+| DELETE         | Delete/Destroy Resource |
+
+### RESTFUL API STANDARDS
+| REQUEST METHOD | Standard                 |
+|----------------|--------------------------|
+| GET /data      | Get data                 |
+| GET /data/1    | Get data with ID of 1    |
+| POST /data     | Add data                 |
+| PUT /data/1    | Update data with ID of 1 |
+| DELETE /data/1 | Delete data with ID of 1 |
+
+- *[ALL METHODS](https://developer.mozilla.org/en-US/docs/web/http/methods)*
